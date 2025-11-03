@@ -147,7 +147,7 @@ class SamplesPusherImpl(
     deleteFiles.forEach { manager.removeAllSnippets(it) }
     val badSnippets = mutableListOf<Snippet>()
     res.forEach {
-      if (it.value.errors.isNotEmpty()) {
+      if (it.value.errors.any { it.severity == ProjectSeverity.ERROR }) {
         logger.error("Filename: ${it.value.fileName}")
         logger.error("Code: \n${it.key}")
         logger.error("Errors: \n${it.value.errors.joinToString("\n")}")
