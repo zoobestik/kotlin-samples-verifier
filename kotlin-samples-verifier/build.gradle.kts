@@ -52,7 +52,7 @@ docker {
 dockerRun {
   name = "kotlin-compiler-server"
   image = dockerImageName
-  arguments("--network=host")
+  arguments("--network=host", "--platform=linux/amd64")
   clean = false
 }
 
