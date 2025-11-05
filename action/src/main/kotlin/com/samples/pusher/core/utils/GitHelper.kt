@@ -76,7 +76,10 @@ internal fun pushRepo(git: Git, url: String, credentialsProvider: CredentialsPro
       if (RemoteRefUpdate.Status.NON_EXISTING != update.status
         && RemoteRefUpdate.Status.OK != update.status
       ) {
-        throw GitException("Expected non-existent ref but got: ${update.status.name}:${update.message}")
+        throw GitException("""
+          Expected non-existent ref but got: ${update.status.name}:${update.message}
+            ${update.srcRef}: ${update.trackingRefUpdate?.remoteName}  ${update.trackingRefUpdate?.localName}
+        """.trimIndent())
       }
     }
   }
